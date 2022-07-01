@@ -1,0 +1,6 @@
+numpy
+wheel
+setuptools
+twine
+requests
+bs4
