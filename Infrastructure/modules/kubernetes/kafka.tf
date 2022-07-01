@@ -22,7 +22,6 @@ resource "kubernetes_deployment" "kafka" {
     labels = {
       app = "kafka"
     }
-    namespace = "lighthouse"
   }
 
   spec {
@@ -73,7 +72,6 @@ resource "kubernetes_service" "kafka" {
     labels = {
       app = "kafka"
     }
-    namespace = "lighthouse"
   }
   spec {
     selector = {
