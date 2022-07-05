@@ -65,8 +65,21 @@ resource "kubernetes_deployment" "jenkins" {
         container {
           name = "jenkins"
           image = "jenkins/jenkins:lts"
+          resources {
+            requests = {
+              cpu = "1.0"
+              memory = "1Gi"
+            }
+          }
+          env {
+            name = "DOCKER_HOST"
+            value = "tcp://localhost:2375"
+          }
           port {
             container_port = 8080
+          }
+          port {
+            container_port = 50000
           }
           volume_mount {
             name = "jenkins-persistent"

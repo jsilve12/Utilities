@@ -7,7 +7,7 @@ resource "kubernetes_deployment" "lighthouse" {
     namespace = "lighthouse"
 
     spec {
-      replicas = 1
+      replicas = var.replicas
 
       selector {
         match_labels = {
@@ -26,7 +26,10 @@ resource "kubernetes_deployment" "lighthouse" {
         spec {
           container {
             name = "lighthouse-api"
-            image = "gcr.io/"
+            image = var.image
+            port {
+              container_port = 8000
+            }
           }
         }
       }

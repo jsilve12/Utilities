@@ -1,0 +1,19 @@
+name: Lighthouse
+on: [push]
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    env:
+      REPO: gcr.io/personal-project-289714/lighthouse
+    steps:
+      - uses: actions/checkout@v1
+      - uses: google-github-actions/setup-gcloud@main
+        with:
+          version: '270.0.0'
+          service_account_key: ${{secrets.GCR_KEY}}
+      - run: gcloud auth configure-docker
+      - run: echo "ID=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+      - run: docker pull $REPO:latest
+      - run: docker build . -t $REPO:$ID -t $REPO:latest --cache-from $REPO:latest
+      - run: docker push $REPO:$ID
+      - run: docker push $REPO:latest

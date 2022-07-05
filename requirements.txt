@@ -4,3 +4,4 @@ setuptools
 twine
 requests
 bs4
+fastapi
