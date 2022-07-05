@@ -10,5 +10,5 @@ COPY Infrastructure/ Infrastructure/
 COPY Web-Py/ Web-Py/
 COPY setup.py setup.py
 
-python3 setup.py bdist_wheel
-pip install dist/utilities-1.0.0-py3-none-any.whl
+RUN python3 setup.py bdist_wheel
+RUN pip install dist/utilities-1.0.0-py3-none-any.whl
