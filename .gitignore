@@ -2,3 +2,5 @@ utilities*
 build*
 dist*
 .terraform*
+*keys.json
+*temp.json
