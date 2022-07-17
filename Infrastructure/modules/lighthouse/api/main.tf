@@ -32,7 +32,7 @@ resource "kubernetes_deployment" "lighthouse" {
             container_port = 8000
           }
           command = ["uvicorn"]
-          args = ["ETL.api:APP", "--host", "0.0.0.0"]
+          args = ["API.api:APP", "--host", "0.0.0.0"]
         }
       }
     }
