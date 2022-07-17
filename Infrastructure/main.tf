@@ -53,3 +53,8 @@ provider "helm" {
 module "kubernetes" {
   source = "./modules/kubernetes"
 }
+
+module "lighthouse_api" {
+  source = "./modules/lighthouse/api"
+  image = "gcr.io/personal-project-289714/lighthouse:20220707174700"
+}

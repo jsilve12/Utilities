@@ -5,3 +5,4 @@ dist*
 *keys.json
 *temp.json
 *.tfstate*
+*pyc
