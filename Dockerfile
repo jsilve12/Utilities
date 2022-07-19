@@ -6,6 +6,7 @@ RUN pip3 install -r requirements.txt
 WORKDIR /Utilities
 COPY Cloud/ Cloud/
 COPY Common/ Common/
+COPY Databases/ Databases/
 COPY Infrastructure/ Infrastructure/
 COPY Web-Py/ Web-Py/
 COPY setup.py setup.py
