@@ -56,5 +56,5 @@ module "kubernetes" {
 
 module "lighthouse" {
   source = "./modules/lighthouse"
-  image = "gcr.io/personal-project-289714/lighthouse:20220717195738"
+  image = "gcr.io/personal-project-289714/lighthouse:20220719213839"
 }
