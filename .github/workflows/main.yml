@@ -13,7 +13,7 @@ jobs:
           service_account_key: ${{secrets.GCR_KEY}}
       - run: gcloud auth configure-docker
       - run: echo "ID=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
-      # - run: docker pull $REPO:latest
+      - run: docker pull $REPO:latest
       - run: docker build . -t $REPO:$ID -t $REPO:latest --cache-from $REPO:latest
       - run: docker push $REPO:$ID
       - run: docker push $REPO:latest
