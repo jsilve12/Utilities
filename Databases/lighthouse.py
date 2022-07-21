@@ -51,7 +51,7 @@ def get_dependencies(cursor, job_id):
 
 
 def get_tracking(cursor, job_id):
-    cursor.execute('SELECT * FROM tracking WHERE job=%s ORDER BY occured DESC', (job_id, ))
+    cursor.execute('SELECT * FROM tracking JOIN job ON tracking.job = job.id WHERE job=%s ORDER BY occured DESC', (job_id, ))
     return cursor.fetchall()
 
 
