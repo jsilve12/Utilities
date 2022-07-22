@@ -67,4 +67,7 @@ def get_variable_values(cursor, variable_id):
 
 def insert_tracking(track_id, job_id):
     with CONN.cursor() as cursor:
-        cursor.execute(f"INSERT INTO tracking(job, id) VALUES{','.join(['(%s, %s)' for i in track_id])}; COMMIT;", [i for j in track_id for i in [job_id, j]])
+        try:
+            cursor.execute(f"INSERT INTO tracking(job, id) VALUES{','.join(['(%s, %s)' for i in track_id])}; COMMIT;", [i for j in track_id for i in [job_id, j]])
+        except:
+            print('tracking error')
