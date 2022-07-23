@@ -22,6 +22,7 @@ resource "kubernetes_deployment" "collections_daemon" {
         }
       }
       spec {
+        service_account_name = "lighthouse-iam"
         container {
           name = "collections-daemon"
           image = var.image

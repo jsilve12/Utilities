@@ -1,3 +1,10 @@
+module "workload-identity" {
+  source = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  name = "lighthouse-iam"
+  namespace = "lighthouse"
+  project_id = "personal-project-289714"
+  roles = ["roles/storage.admin", "roles/datastore.user"]
+}
 
 module "api" {
   source = "./api"
@@ -11,5 +18,10 @@ module "setup" {
 
 module "collections" {
   source = "./collections"
+  image = var.image
+}
+
+module "etl" {
+  source = "./etl"
   image = var.image
 }

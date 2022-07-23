@@ -1,34 +1,33 @@
-resource "kubernetes_deployment" "lighthouse_daemon" {
+resource "kubernetes_deployment" "etl_daemon" {
   metadata {
-    name = "lighthouse-daemon"
+    name = "etl-daemon"
     labels = {
-      app = "lighthouse-daemon"
+      app = "etl-daemon"
     }
     namespace = "lighthouse"
   }
-
   spec {
     replicas = 1
     selector {
       match_labels = {
-        app = "lighthouse-daemon"
+        app = "etl-daemon"
         tier = "deploy"
       }
     }
     template {
       metadata {
         labels = {
-          app = "lighthouse-daemon"
+          app = "etl-daemon"
           tier = "deploy"
         }
       }
       spec {
         service_account_name = "lighthouse-iam"
         container {
-          name = "lighthouse-daemon"
+          name = "etl-daemon"
           image = var.image
           command = ["python3"]
-          args = ["server.py"]
+          args = ["ETL/main.py"]
         }
       }
     }

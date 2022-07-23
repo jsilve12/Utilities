@@ -13,31 +13,49 @@ class rabbit():
         self.lock = threading.Lock()
         # self.channel.queue_declare(queue=self.que)
 
+    def restart_conn(self):
+        self.connection = pika.BlockingConnection(self.params)
+
     def create_que(self):
         self.lock.acquire()
-        self.channel.queue_declare(queue=self.que)
+        try:
+            self.channel.queue_declare(queue=self.que)
+        except:
+            self.restart_conn()
         self.lock.release()
 
     def get_message(self):
         self.lock.acquire()
-        mess = self.channel.basic_get(self.que)
+        try:
+            mess = self.channel.basic_get(self.que)
+        except:
+            self.restart_conn()
         self.lock.release()
         return mess
 
     def send_message(self, mess):
         self.lock.acquire()
-        self.channel.basic_publish(exchange='', routing_key=self.que, body=mess)
+        try:
+            self.channel.basic_publish(exchange='', routing_key=self.que, body=mess)
+        except:
+            self.restart_conn()
         self.lock.release()
 
     def ack_message(self, method):
         self.lock.acquire()
-        self.channel.basic_ack(method.delivery_tag)
+        try:
+            self.channel.basic_ack(method.delivery_tag)
+        except:
+            self.restart_conn()
         self.lock.release()
 
     def listen(self, in_que):
         while True:
             self.lock.acquire()
-            mess = self.channel.basic_get(self.que)
+            try:
+                mess = self.channel.basic_get(self.que)
+            except:
+                self.restart_conn()
             self.lock.release()
             if mess[0]:
                 in_que.put(mess)

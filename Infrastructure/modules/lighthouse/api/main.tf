@@ -25,6 +25,7 @@ resource "kubernetes_deployment" "lighthouse" {
         }
       }
       spec {
+        service_account_name = "lighthouse-iam"
         container {
           name = "lighthouse-api"
           image = var.image
